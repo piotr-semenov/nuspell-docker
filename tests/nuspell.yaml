@@ -1,0 +1,6 @@
+---
+command:
+  nuspell --version:
+    exit-status: 0
+    stdout:
+      contain-substring: nuspell {{.Env.nuspell_version}}
