@@ -1,7 +1,7 @@
 FROM alpine as builder
 LABEL stage=intermediate
 
-ARG nuspell_version=v5.1.4
+ARG nuspell_version=5.1.4
 
 COPY ./apkfile ./dockerfile-commons/reduce_alpine.sh /tmp/.conf/
 COPY ./repositories /etc/apk/
@@ -17,7 +17,7 @@ WORKDIR /tmp/
 # hadolint ignore=SC2046,DL3003
 RUN \
     # Clone the specified version.
-    git -c advice.detachedHead=false clone --depth 1 --branch "$nuspell_version" https://github.com/nuspell/nuspell && \
+    git -c advice.detachedHead=false clone --depth 1 --branch "v$nuspell_version" https://github.com/nuspell/nuspell && \
     cd "$(basename "$_" .git)" && \
     \
     # Build & install.
