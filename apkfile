@@ -1,0 +1,5 @@
+bash
+build-base
+git
+cmake
+icu-dev@edge
