@@ -4,3 +4,17 @@ command:
     exit-status: 0
     stdout:
       contain-substring: nuspell {{.Env.nuspell_version}}
+
+  nuspell -D:
+    exit-status: 0
+    stdout:
+      contain-substring: |
+        Available dictionaries:
+        en_US           /usr/share/hunspell/en_US.aff
+
+  echo "Hellow, worrld!" | nuspell -d en_US:
+    exit-status: 0
+    stdout:
+      and:
+        - contain-substring: "Wrong: Hellow"
+        - contain-substring: "Wrong: worrld"

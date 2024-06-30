@@ -20,7 +20,7 @@ help:  ## Prints the help.
 
 .DEFAULT_GOAL := all
 .PHONY: all
-all: lint-dockerfiles build;  ## Builds the docker image.
+all: lint-dockerfiles build clean test;
 
 
 .PHONY: build
@@ -35,4 +35,4 @@ clean: clean-docker;
 
 .PHONY: test
 test:  ## Tests the the already built docker image.
-	$(call goss_docker_image,"$(IMAGE_NAME):latest","tests/nuspell.yaml","nuspell_version=$(NUSPELL_VER)")
+	$(call goss_docker_image,"$(IMAGE_NAME):latest","tests/nuspell.yaml","nuspell_version=$(NUSPELL_VER)","-v $$(pwd)/tests/hunspell/:/usr/share/hunspell")
