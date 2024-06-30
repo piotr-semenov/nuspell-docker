@@ -27,7 +27,9 @@ RUN \
     make install && \
     \
     # Reduce to the minimal size distribution.
-    sh /tmp/.conf/reduce_alpine.sh -v /target /usr/bin/nuspell && \
+    sh /tmp/.conf/reduce_alpine.sh -v /target /usr/bin/nuspell \
+                                              /usr/lib/libnuspell.so* \
+                                              /usr/share/icu/ && \
     \
     # Clean out.
     apk del $(sed -e "s/@.*$//" /tmp/.conf/apkfile) && \
@@ -48,4 +50,4 @@ LABEL \
 
 COPY --from=builder /target /
 
-ENTRYPOINT ["sh", "-c"]
+ENTRYPOINT ["nuspell"]
